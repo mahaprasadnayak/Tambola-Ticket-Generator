@@ -10,8 +10,10 @@ import (
 
 func main() {
 	fmt.Println("Setting up the server...")
-	//defer global.PostgresConn.Close()
+	defer global.PostgresConn.Close()
 	http.HandleFunc("/", service.GetServerStatus) //health check of the server with default endpoint
+	http.HandleFunc("/set_ticket", service.SetTicket)
+	http.HandleFunc("/get_ticket", service.GetTicket)
 	serverErr := http.ListenAndServe(global.Port, nil)
 	if serverErr != nil {
 		fmt.Println("Error starting the server ", serverErr, " from the port::", global.Port)

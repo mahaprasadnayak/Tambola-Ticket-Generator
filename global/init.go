@@ -1,6 +1,7 @@
 package global
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
@@ -25,14 +26,14 @@ func init() {
 
 	//postgres connection
 
-	// config, err := pgxpool.ParseConfig(Db_Creds + "?")
-	// if err != nil {
-	// 	fmt.Println("Error parsing connection string ", err)
-	// 	log.Fatal("Error parsing connection string ", err)
-	// }
-	// PostgresConn, err = pgxpool.ConnectConfig(context.Background(), config)
-	// if err != nil {
-	// 	fmt.Println("Error connecting to database ", err)
-	// 	log.Fatal("Error connecting to database ", err)
-	// }
+	config, err := pgxpool.ParseConfig(Db_Creds + "?")
+	if err != nil {
+		fmt.Println("Error parsing connection string ", err)
+		log.Fatal("Error parsing connection string ", err)
+	}
+	PostgresConn, err = pgxpool.ConnectConfig(context.Background(), config)
+	if err != nil {
+		fmt.Println("Error connecting to database ", err)
+		log.Fatal("Error connecting to database ", err)
+	}
 }
